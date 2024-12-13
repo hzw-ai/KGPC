@@ -1,0 +1,14 @@
+scipy
+spacy
+numpy
+scikit-learn
+h5py
+future
+nltk
+pandas
+pyyaml
+torch==1.9.1
+tqdm
+matplotlib
+-e git://github.com/TimDettmers/bashmagic.git#egg=bashmagic
+-e git://github.com/TimDettmers/spodernet.git#egg=spodernet
