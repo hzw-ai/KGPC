@@ -1,14 +1,14 @@
 batch_size: 32
 num_epochs: 100
-lr: 0.015
-weight_decay: 0.0005
-label_smoothing_epsilon: 0.7
-init_emb_size: 64
-gc1_emb_size: 32
-embedding_dim: 16
+lr: 0.001
+weight_decay: 0.0001
+label_smoothing_epsilon: 0.0 # 0.7
+init_emb_size: 1024  # 128
+gc1_emb_size: 512  # 64
+embedding_dim: 256  # 16
 input_dropout: 0.00
-dropout_rate: 0.20 # 0.25
-channels: 40 # 200
+dropout_rate: 0.00 # 0.25
+channels: 120 # 40
 kernel_size: 3
 n_clusters: 3
 label_relation: has_label

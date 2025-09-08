@@ -1,4 +1,5 @@
 import json
+import pickle
 
 import pandas as pd
 import torch
@@ -128,7 +129,7 @@ def main(args):
     patent_grant = {i[0]: i[2] for i in patent_triple}
     patent_index = []
     labels = []
-	with open('data/%s/embeddings_bge.pkl' % args['dataset'], 'rb') as f:
+    with open('data/%s/embeddings_bge.pkl' % args['dataset'], 'rb') as f:
         embeddings = pickle.load(f)
     patent_embs = []
     for i in range(num_entities):
@@ -136,7 +137,7 @@ def main(args):
         if '@' not in token:
             continue
         patent_index.append(i)
-		patent_embs.append(torch.tensor(embeddings[token.upper()]).to(args['device']))
+        patent_embs.append(torch.tensor(embeddings[token.upper()]).to(args['device']))
         labels.append(int(patent_grant[token.upper()]))
     labels = torch.LongTensor(labels)
     patent_embs = torch.cat(patent_embs, dim=0)
@@ -277,10 +278,9 @@ def main(args):
         acc_list.append(acc)
         nmi_list.append(nmi)
         ari_list.append(ari)
-
-	print('===== Clustering performance: =====')
-	# result = 'Acc {:.4f}, nmi {:.4f}, ari {:.4f}'.format(acc, nmi, ari)
-	result = ('Acc [{:.4f}, {:.4f}], nmi [{:.4f}, {:.4f}], ari [{:.4f}, {:.4f}]'
+    print('===== Clustering performance: =====')
+    # result = 'Acc {:.4f}, nmi {:.4f}, ari {:.4f}'.format(acc, nmi, ari)
+    result = ('Acc [{:.4f}, {:.4f}], nmi [{:.4f}, {:.4f}], ari [{:.4f}, {:.4f}]'
 			  .format(np.mean(acc_list), np.std(acc_list), np.mean(nmi_list), np.std(nmi_list),
 					  np.mean(ari_list), np.std(ari_list)))
     print(result)
